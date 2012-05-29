@@ -40,6 +40,11 @@ You can then use it in your theme as such:
 	wp_img_resizer_src( $args );
 ```
 
+**Shortcode for an gallery
+```
+[resizer_gallery width='120']
+```
+
 **Also the first solution if Aqua Resizer**
 ```
 	aq_resize( $img_url,$width );
@@ -48,7 +53,7 @@ You can then use it in your theme as such:
 More usage instructions and examples can be found in our [wiki](https://github.com/bueltge/WP-Image-Resizer/wiki)
 
 ### Contact & Feedback
-The plugin is designed and developed by [Syamil MJ](http://aquagraphite.com/) and me ([Frank Bültge](http://bueltge.de))
+The plugin is designed and developed by [Syamil MJ](http://aquagraphite.com/) and me ([Frank Bï¿½ltge](http://bueltge.de))
 
 Please let me know if you like the plugin or you hate it or whatever ... Please fork it, add an issue for ideas and bugs.
 
