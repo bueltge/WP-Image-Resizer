@@ -12,7 +12,8 @@
  */
 
 /**
- * Based on solution Aqua-Resizer https://github.com/sy4mil/Aqua-Resizer
+ * Based on the idea Aqua-Resizer
+ * https://github.com/sy4mil/Aqua-Resizer
  * by Syamil MJ
  */
  
