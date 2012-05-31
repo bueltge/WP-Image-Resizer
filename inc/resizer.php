@@ -182,6 +182,14 @@ if ( ! function_exists( 'wp_img_resizer' ) ) {
 	 */
 	function wp_img_resizer( $args = '', $attr = '' ) {
 		
+		// conditions to cancel the function
+		if(
+				( ! $args['url'] ) && 
+				( ! $args['width'] ) &&
+				( FALSE === strpos( $args['url'], home_url() ) )
+			)
+			return FALSE;
+		
 		// set to get an array
 		if ( ! isset( $args['single'] ) )
 			$args['single'] = FALSE;
@@ -190,6 +198,9 @@ if ( ! function_exists( 'wp_img_resizer' ) ) {
 			$args['echo']   = TRUE;
 		
 		$image = wp_img_resizer_src( $args );
+		
+		if ( ! $image )
+			return FALSE;
 		
 		list( $image[0], $image[1], $image[2] ) = $image;
 		$hwstring = image_hwstring( $image[1], $image[2] );
