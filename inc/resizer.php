@@ -21,6 +21,14 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 	 */
 	function wp_img_resizer_src( $args = '' ) {
 		
+		// conditions to cancel the function
+		if(
+				( ! $args['url'] ) && 
+				( ! $args['width'] ) &&
+				( FALSE === strpos( $args['url'], home_url() ) )
+			)
+			return FALSE;
+		
 		// set defaults
 		$defaults = array(
 			'url'    => FALSE,
@@ -36,12 +44,7 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 			apply_filters( 'wp_img_resizer_args', $defaults )
 		);
 		
-		// validate inputsan is an @ToDo
-		if ( ! $args['url'] )
-			return FALSE;
-		
-		if ( ! $args['width'] )
-			return FALSE;
+		// validate inputs is an @ToDo
 		// set to integer
 		$args['width']  = (int) $args['width'];
 		$args['height'] = (int) $args['height'];
