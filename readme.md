@@ -13,11 +13,13 @@ With Aqua Resizer, the only required inputs are the URL and width. It's easy, fa
 You can use the solution as plugin or include the functions in your theme.
 
 **As Plugin**
+
 Install the plugin and activate in backend. After activation you can use all functions.
 1. Upload the file to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 **In your theme**
+
 Include the the file with follow syntax in your `functions.php` of your theme and now you can also use the functions. 
 ```
 require_once( 'aq_resizer.php' );
