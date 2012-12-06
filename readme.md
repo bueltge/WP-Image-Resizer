@@ -58,7 +58,7 @@ More usage instructions and examples can be found in our [wiki](https://github.c
 * WordPress (also Multisite) version 3.3 and later (tested at 3.5-RC4)
 * PHP 5.2.4
 
-### Installtion
+### Installation
 * Use as plugin or
 * use in your plugin or theme as library
 
