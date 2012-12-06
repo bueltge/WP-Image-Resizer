@@ -38,7 +38,7 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 			'single' => TRUE
 		);
 		
-		// set an filter for custom settings via plugin
+		// set a filter for custom settings via plugin
 		$args = wp_parse_args(
 			$args,
 			apply_filters( 'wp_img_resizer_args', $defaults )
@@ -79,7 +79,7 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 		$upload_dir  = $upload_info['basedir'];
 		$upload_url  = $upload_info['baseurl'];
 		
-		//check if image url is local
+		// check if image url is local
 		if ( FALSE === strpos( $args['url'], home_url() ) )
 			return FALSE;
 		
@@ -106,7 +106,7 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 		
 		// use this to check if cropped image already exists, so we can return that instead
 		$suffix = "{$noun['weight']}x{$noun['height']}";
-		$noun['path'] = str_replace( '.'.$ext, '', $rel_path );
+		$noun['path'] = str_replace( '.' . $ext, '', $rel_path );
 		$noun['file'] = "{$upload_dir}{$noun['path']}-{$suffix}.{$ext}";
 		
 		// if orig size is smaller
@@ -114,7 +114,7 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 			
 			if ( ! $noun['height'] )  {
 				// can't resize, so return original url
-				$noun['url'] = $args['url'];
+				$noun['url']    = $args['url'];
 				$noun['weight'] = $original['width'];
 				$noun['height'] = $original['height'];
 				
@@ -122,8 +122,13 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 				//else check if cache exists
 				if ( file_exists( $noun['file'] ) && getimagesize( $noun['file'] ) ) {
 					$noun['url'] = "{$upload_url}{$noun['path']}-{$suffix}.{$ext}";
-				} else { //else resize and return the new resized image url
-					$resized_img_path = image_resize( $img_path, $args['width'], $args['height'], $args['crop'] );
+				} else { // else resize and return the new resized image url
+					// check for class, new in WP 3.5
+					if ( class_exists( 'WP_Image_Editor' ) )
+						$resized_img_path = WP_Image_Editor::resize( $img_path, $args['width'], $args['height'], $args['crop'] );
+					else
+						$resized_img_path = image_resize( $img_path, $args['width'], $args['height'], $args['crop'] );
+					
 					$resized_rel_path = str_replace( $upload_dir, '', $resized_img_path);
 					$noun['url'] = $upload_url . $resized_rel_path;
 				}
@@ -135,9 +140,16 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 			) { // else check if cache exists
 			$noun['url'] = "{$upload_url}{$noun['path']}-{$suffix}.{$ext}";
 		} else { //else, we resize the image and return the new resized image url
-			$resized_img_path = image_resize(
-				$img_path, $args['width'], $args['height'], $args['crop']
-			);
+			// check for class, new in WP 3.5
+			if ( class_exists( 'WP_Image_Editor' ) )
+				$resized_img_path = WP_Image_Editor::resize(
+					$img_path, $args['width'], $args['height'], $args['crop']
+				);
+			else
+				$resized_img_path = image_resize(
+					$img_path, $args['width'], $args['height'], $args['crop']
+				);
+			
 			$resized_rel_path = str_replace( $upload_dir, '', $resized_img_path);
 			$noun['url'] = $upload_url . $resized_rel_path;
 		}
@@ -234,4 +246,5 @@ if ( ! function_exists( 'wp_img_resizer' ) ) {
 		else
 			return $html;
 	}
-}
+
+} // end if function exists

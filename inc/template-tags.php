@@ -2,7 +2,7 @@
 /**
  * WordPress Image Resizer
  * 
- * @version  1.0.0
+ * @version  1.0.1
  * @author   fb
  */
 
@@ -45,24 +45,26 @@ if ( ! function_exists( 'wp_img_resizer_gallery' ) ) {
 	 * This implements the functionality of the Gallery Shortcode for displaying
 	 * WordPress images on a post.
 	 * 
-	 * @param array $attr Attributes of the shortcode.
+	 * @param  Array  $attr Attributes of the shortcode.
 	 * @return string HTML content to display gallery.
 	 */
 	function wp_img_resizer_gallery( $attr ) {
 		global $post;
 	
 		static $instance = 0;
-		$instance++;
+		$instance ++;
 	
 		// Allow plugins/themes to override the default gallery template.
-		$output = apply_filters('post_gallery', '', $attr);
+		$output = apply_filters( 'post_gallery', '', $attr );
 		if ( $output != '' )
 			return $output;
 	
 		// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
 		if ( isset( $attr['orderby'] ) ) {
+			
 			$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-			if ( !$attr['orderby'] )
+			
+			if ( ! $attr['orderby'] )
 				unset( $attr['orderby'] );
 		}
 	
@@ -86,7 +88,7 @@ if ( ! function_exists( 'wp_img_resizer_gallery' ) ) {
 		if ( 'RAND' == $order )
 			$orderby = 'none';
 	
-		if ( !empty($include) ) {
+		if ( ! empty($include) ) {
 			$include = preg_replace( '/[^0-9,]+/', '', $include );
 			$_attachments = get_posts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
 	
@@ -96,31 +98,47 @@ if ( ! function_exists( 'wp_img_resizer_gallery' ) ) {
 			}
 		} elseif ( ! empty($exclude) ) {
 			$exclude = preg_replace( '/[^0-9,]+/', '', $exclude );
-			$attachments = get_children( array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+			$attachments = get_children( array(
+				'post_parent'    => $id,
+				'exclude'        => $exclude,
+				'post_status'    => 'inherit',
+				'post_type'      => 'attachment',
+				'post_mime_type' => 'image',
+				'order'          => $order,
+				'orderby'        => $orderby
+			) );
 		} else {
-			$attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+			$attachments = get_children( array(
+				'post_parent'    => $id,
+				'post_status'    => 'inherit',
+				'post_type'      => 'attachment',
+				'post_mime_type' => 'image',
+				'order'          => $order,
+				'orderby'        => $orderby
+			) );
 		}
 	
-		if ( empty($attachments) )
-			return '';
+		if ( empty( $attachments ) )
+			return NULL;
 	
 		if ( is_feed() ) {
 			$output = "\n";
 			foreach ( $attachments as $att_id => $attachment )
-				$output .= wp_get_attachment_link($att_id, $size, true) . "\n";
+				$output .= wp_get_attachment_link( $att_id, $size, TRUE ) . "\n";
+			
 			return $output;
 		}
-	
-		$itemtag = tag_escape($itemtag);
+		
+		$itemtag    = tag_escape($itemtag);
 		$captiontag = tag_escape($captiontag);
-		$columns = intval($columns);
-		$itemwidth = $columns > 0 ? floor(100/$columns) : 100;
-		$float = is_rtl() ? 'right' : 'left';
-	
+		$columns    = intval($columns);
+		$itemwidth  = $columns > 0 ? floor(100/$columns) : 100;
+		$float      = is_rtl() ? 'right' : 'left';
+		
 		$selector = "gallery-{$instance}";
-	
+		
 		$gallery_style = $gallery_div = '';
-		if ( apply_filters( 'use_default_gallery_style', true ) )
+		if ( apply_filters( 'use_default_gallery_style', TRUE ) )
 			$gallery_style = "
 			<style type='text/css'>
 				#{$selector} {
@@ -140,40 +158,37 @@ if ( ! function_exists( 'wp_img_resizer_gallery' ) ) {
 				}
 			</style>
 			<!-- see gallery_shortcode() in wp-includes/media.php -->";
-		$size_class = sanitize_html_class( $size );
+		$size_class  = sanitize_html_class( $size );
 		$gallery_div = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
-		$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
+		$output      = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
 	
 		$i = 0;
 		foreach ( $attachments as $id => $attachment ) {
-			//$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
 			
-			$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_img_resizer_attachment_link($id, $size, false, false, '', $width) : wp_img_resizer_attachment_link($id, $size, true, false, '', $width);
-			//var_dump( $link );
-			//$args = array( 'url' => wp_get_attachment_url( $attachment->ID , 'full' ), 'width' => $width, 'echo' => false );
-			//$link = wp_img_resizer( $args );
-			
+			$link = isset( $attr['link'] ) && 'file' == $attr['link'] ? 
+				wp_img_resizer_attachment_link( $id, $size, FALSE, FALSE, '', $width ) : 
+				wp_img_resizer_attachment_link( $id, $size, TRUE, FALSE, '', $width );
 			
 			$output .= "<{$itemtag} class='gallery-item'>";
 			$output .= "
 				<{$icontag} class='gallery-icon'>
 					$link
 				</{$icontag}>";
-			if ( $captiontag && trim($attachment->post_excerpt) ) {
+			if ( $captiontag && trim( $attachment->post_excerpt ) ) {
 				$output .= "
 					<{$captiontag} class='wp-caption-text gallery-caption'>
-					" . wptexturize($attachment->post_excerpt) . "
+					" . wptexturize( $attachment->post_excerpt ) . "
 					</{$captiontag}>";
 			}
 			$output .= "</{$itemtag}>";
 			if ( $columns > 0 && ++$i % $columns == 0 )
 				$output .= '<br style="clear: both" />';
 		}
-	
+		
 		$output .= "
 				<br style='clear: both;' />
 			</div>\n";
-	
+		
 		return $output;
 	}
 	
@@ -186,14 +201,14 @@ if ( ! function_exists( 'wp_img_resizer_attachment_link' ) ) {
 	/**
 	 * Retrieve an attachment page link using an image or icon, if possible.
 	 *
-	 * @since 2.5.0
-	 * @uses apply_filters() Calls 'wp_get_attachment_link' filter on HTML content with same parameters as function.
-	 *
-	 * @param int $id Optional. Post ID.
-	 * @param string $size Optional, default is 'thumbnail'. Size of image, either array or string.
-	 * @param bool $permalink Optional, default is false. Whether to add permalink to image.
-	 * @param bool $icon Optional, default is false. Whether to include icon.
-	 * @param string $text Optional, default is false. If string, then will be link text.
+	 * @since  2.5.0
+	 * @uses   apply_filters() Calls 'wp_get_attachment_link' filter on HTML content with same parameters as function.
+	 * 
+	 * @param  int $id Optional. Post ID.
+	 * @param  string $size Optional, default is 'thumbnail'. Size of image, either array or string.
+	 * @param  bool $permalink Optional, default is false. Whether to add permalink to image.
+	 * @param  bool $icon Optional, default is false. Whether to include icon.
+	 * @param  string $text Optional, default is false. If string, then will be link text.
 	 * @return string HTML content.
 	 */
 	function wp_img_resizer_attachment_link( $id = 0, $size = 'thumbnail', $permalink = false, $icon = false, $text = false, $width = FALSE ) {
@@ -209,7 +224,11 @@ if ( ! function_exists( 'wp_img_resizer_attachment_link' ) ) {
 		
 		$post_title = esc_attr( $_post->post_title );
 		
-		$args = array( 'url' => wp_get_attachment_url( $id , $size ), 'width' => $width, 'echo' => false );
+		$args = array(
+			'url'   => wp_get_attachment_url( $id , $size ),
+			'width' => $width,
+			'echo'  => FALSE
+		);
 		$link = wp_img_resizer( $args );
 		
 		if ( $text )
@@ -219,7 +238,7 @@ if ( ! function_exists( 'wp_img_resizer_attachment_link' ) ) {
 		else
 			$link_text = '';
 		
-		if ( trim( $link_text ) == '' )
+		if ( '' == trim( $link_text ) )
 			$link_text = $_post->post_title;
 		
 		return apply_filters( 
