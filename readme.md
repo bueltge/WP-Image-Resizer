@@ -52,8 +52,18 @@ You can then use it in your theme as such:
 
 More usage instructions and examples can be found in our [wiki](https://github.com/bueltge/WP-Image-Resizer/wiki)
 
-### Contact & Feedback
-The plugin is designed and developed by [Syamil MJ](http://aquagraphite.com/) and me ([Frank Bültge](http://bueltge.de))
+## Installation
+
+### Requirements
+* WordPress (also Multisite) version 3.3 and later (tested at 3.5-RC4)
+* PHP 5.2.4
+
+### Installtion
+* Use as plugin or
+* use in your plugin or theme as library
+
+## Contact & Feedback
+The plugin is designed and developed by ([Frank Bültge](http://bueltge.de)) based on the idea from [Syamil MJ](http://aquagraphite.com/)
 
 Please let me know if you like the plugin or you hate it or whatever ... Please fork it, add an issue for ideas and bugs.
 
