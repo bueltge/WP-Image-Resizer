@@ -42,7 +42,7 @@ You can then use it in your theme as such:
 	wp_img_resizer_src( $args );
 ```
 
-**Shortcode for an gallery
+**Shortcode for an gallery**
 ```
 [resizer_gallery width='120']
 ```
