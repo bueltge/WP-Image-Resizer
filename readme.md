@@ -76,7 +76,7 @@ Good news, this plugin is free for everyone! Since it's released under the GPL, 
 
 ## Changelog
 Dez 06, 2012
- * Update for use in WOrdPress 3.5; use the new class `WP_Image_Editor`
+ * Update for use in WordPress 3.5; use the new class `WP_Image_Editor`
  * Hint: more about changes in WP 3.5 to images see this [post](http://make.wordpress.org/core/2012/12/06/wp_image_editor-is-incoming/)
 
 May 31, 2012
