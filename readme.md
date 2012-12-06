@@ -62,19 +62,23 @@ More usage instructions and examples can be found in our [wiki](https://github.c
 * Use as plugin or
 * use in your plugin or theme as library
 
-## Contact & Feedback
+## Other Notes
+### Disclaimer
+I'm German and my English might be gruesome here and there. So please be patient with me and let me know of typos or grammatical farts. Thanks
+
+### Contact & Feedback
 The plugin is designed and developed by ([Frank Bültge](http://bueltge.de)) based on the idea from [Syamil MJ](http://aquagraphite.com/)
 
 Please let me know if you like the plugin or you hate it or whatever ... Please fork it, add an issue for ideas and bugs.
 
+### License
+Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog. But if you enjoy this plugin, you can thank me and leave a [small donation](http://bueltge.de/wunschliste/ "Wishliste and Donate") for the time I've spent writing and supporting this plugin. And I really don't want to know how many hours of my life this plugin has already eaten ;)
 
+## Changelog
+(Dez 06, 2012)
+ * Update for use in WOrdPress 3.5; use the new class `WP_Image_Editor`
+ * more hints about changes in WP 3.5 to images see the [link](http://make.wordpress.org/core/2012/12/06/wp_image_editor-is-incoming/)
 
-
-
-
-
-
-
-
-
-
+(May 31, 2012)
+ * Fix for themes, there are unsupported thumbnails
+ * or see the [commits](https://github.com/bueltge/WP-Image-Resizer/commits/master)
