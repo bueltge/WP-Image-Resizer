@@ -200,12 +200,11 @@ if ( ! function_exists( 'wp_img_resizer' ) ) {
 	function wp_img_resizer( $args = '', $attr = '' ) {
 		
 		// conditions to cancel the function
-		if(
-				( ! $args['url'] ) && 
-				( ! $args['width'] ) &&
-				( FALSE === strpos( $args['url'], home_url() ) )
-			)
-			return FALSE;
+		if ( empty( $args['url'] ) )
+			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $args['url'] );
+		
+		if ( FALSE === strpos( $args['url'], home_url() ) )
+			return new WP_Error( 'wrong_url', __( 'Image is not on the home url.' ), $args['url'] );
 		
 		// set to get an array
 		if ( ! isset( $args['single'] ) )
