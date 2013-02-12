@@ -2,7 +2,7 @@
 /**
  * WordPress Image Resizer
  * 
- * @version  1.0.0
+ * @version  02/12/2013
  * @author   fb
  */
 
@@ -18,26 +18,29 @@ if ( ! function_exists( 'aq_resize' ) ) {
 	 * @param int    $width  - (required) 
 	 * @param int    $height - (optional) 
 	 * @param bool   $crop   - (optional) default to soft crop
+	 * @param bool   $retina - (optional) default to no double of width and height
 	 * @param bool   $single - (optional) returns an array if false
 	 */
-	function aq_resize( $url = '', $width = '', $height = NULL, $crop = NULL, $single = TRUE ) {
+	function aq_resize( $url, $width = NULL, $height = NULL, $crop = NULL, $retina = FALSE, $single = TRUE ) {
 		
+		// get error message
 		if ( empty( $url ) )
-			return NULL;
+			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $url );
 		
+		// use settings of WordPress
 		if ( empty( $width ) )
-			return NULL;
+			$width = get_option( 'thumbnail_size_w' );
 		
 		$args = array(
 			'url'    => $url,
 			'width'  => $width,
 			'height' => $height,
 			'crop'   => $crop,
+			'retina' => $retina,
 			'single' => $single
 		);
 		
 		return wp_img_resizer_src( $args );
 	}
-}
-
-
+	
+} // end if function_exists

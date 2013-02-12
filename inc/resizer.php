@@ -2,7 +2,7 @@
 /**
  * WordPress Image Resizer
  * 
- * @version  1.0.0
+ * @version  02/12/2013
  * @author   fb
  */
 
@@ -15,11 +15,12 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 	 *          url    => path to the image
 	 *          width  => 
 	 *          height => Optional
-	 *          crop   => Optional, Whether to crop image or resize. | default is FALSE 
+	 *          crop   => Optional, Whether to crop image or resize. | default is FALSE
+	 *          retina => Optional boolean for creating images that are double the width and height. | default is FALSE
 	 *          single => Optional, true for single url on return $image, false for Array | default is TRUE
 	 * @return  $image Array with url, width, height
 	 */
-	function wp_img_resizer_src( $args = '' ) {
+	function wp_img_resizer_src( $args = array() ) {
 		
 		// conditions to cancel the function
 		if(
@@ -35,6 +36,7 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 			'width'  => FALSE,
 			'height' => NULL,
 			'crop'   => NULL,
+			'retina' => FALSE,
 			'single' => TRUE
 		);
 		
@@ -44,10 +46,12 @@ if ( ! function_exists( 'wp_img_resizer_src' ) ) {
 			apply_filters( 'wp_img_resizer_args', $defaults )
 		);
 		
-		// validate inputs is an @ToDo
-		// set to integer
-		$args['width']  = (int) $args['width'];
-		$args['height'] = (int) $args['height'];
+		// Allow for different retina sizes
+		$args['retina'] = $args['retina'] ? ( $args['retina'] === TRUE ? 2 : $args['retina'] ) : 1;
+		
+		// validate inputs, set to integer
+		$args['width']  = intval( $args['width'] * $args['retina'] );
+		$args['height'] = intval( $args['height'] * $args['retina'] );
 		
 		// set var for original image
 		$original = array(
@@ -180,9 +184,10 @@ if ( ! function_exists( 'wp_img_resizer' ) ) {
 	 * 
 	 * @param   $args  Array with
 	 *          url    => path to the image
-	 *          width  => 
+	 *          width  => Optional, the width of image | default is the settings of WP
 	 *          height => Optional
 	 *          crop   => Optional, Whether to crop image or resize. | default is FALSE 
+	 *          retina => Optional boolean for creating images that are double the width and height. | default is FALSE
 	 *          single => Optional, true for single url on return $image, false for Array | default is TRUE
 	 *          echo   => Optional, true for echo the html, false for an return | default is true
 	 * @param   $attr  Array for attributes of html in img-tag

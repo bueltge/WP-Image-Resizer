@@ -52,7 +52,7 @@ wp_img_resizer_src( $args );
 
 **Also the first solution if Aqua Resizer**
 ```php
-aq_resize( $img_url,$width );
+aq_resize( $img_url, $width );
 ```
 
 More usage instructions and examples can be found in our [wiki](https://github.com/bueltge/WP-Image-Resizer/wiki)
@@ -87,6 +87,12 @@ Please let me know if you like the plugin or you hate it or whatever ... Please 
 Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog. But if you enjoy this plugin, you can thank me and leave a [small donation](http://bueltge.de/wunschliste/ "Wishliste and Donate") for the time I've spent writing and supporting this plugin. And I really don't want to know how many hours of my life this plugin has already eaten ;)
 
 ## Changelog
+Feb 12, 2013
+ * Update Readme
+ * Create [Github Page](http://bueltge.github.com/WP-Image-Resizer)
+ * Add Support for Retina, Double values
+ * Small minor changes
+
 Dez 06, 2012
  * Update for use in WordPress 3.5; use the new class `WP_Image_Editor`
  * Hint: more about changes in WP 3.5 to images see this [post](http://make.wordpress.org/core/2012/12/06/wp_image_editor-is-incoming/)
