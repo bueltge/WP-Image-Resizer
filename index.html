@@ -1,162 +1,161 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>WordPress Image Resizer by bueltge</title>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css" media="screen" />
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<title>WordPress Image Resizer by bueltge</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
+	<div class="container">
+	  
+		<a href="https://github.com/bueltge/WP-Image-Resizer">
+			<img src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on Github" style="position: absolute; top: 0px; left: 0px; border: 0px;" />
+		</a>
 
-        <header>
-          <h1>WordPress Image Resizer</h1>
-          <h2>Resize WordPress images on the fly</h2>
-        </header>
+		<header class="page-header">
+			<h1>WordPress Image Resizer</h1>
+			<p class="lead">Resize WordPress images on the fly</p>
+		</header>
+		
+		<section class="text-center">
+			<iframe src="http://ghbtns.com/github-btn.html?user=bueltge&repo=wp-image-resizer&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="152" height="30"></iframe>
+			<iframe src="http://ghbtns.com/github-btn.html?user=bueltge&repo=wp-image-resizer&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146" height="30"></iframe>
+			<iframe src="http://ghbtns.com/github-btn.html?user=bueltge&type=follow&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="250" height="30"></iframe>
+		</section>
+		
+		<section class="text-center">
+			<button class="btn" type="button">
+				<a href="https://github.com/bueltge/WP-Image-Resizer/zipball/master" id="download-zip" class="button">Download .zip</a>
+			</button>
+			<button class="btn" type="button">
+				<a href="https://github.com/bueltge/WP-Image-Resizer/tarball/master" id="download-tar-gz" class="button">Download .tar.gz</a>
+		  </button>
+			<button class="btn" type="button">
+				<a href="https://github.com/bueltge/WP-Image-Resizer" id="view-on-github" class="button">View on GitHub</a>
+			</button>
+		</section>
+		
+		<hr>
+		
+		<p>Based on the idea of <a href="https://github.com/sy4mil/Aqua-Resizer">Aqua Resizer</a> from <a href="http://aquagraphite.com/">Syamil MJ</a> -- Thanks</p>
+		
+		<h3>Description</h3>
+		
+		<p>This small script will allow you to resize &amp; crop WordPress images uploaded via the media uploader. It relies on WP's native functions to resize the images, and checks if there is an already resized version of the image so that it won't be wasting your server's resources to regenerate the images.</p>
+		
+		<h4>Why use it?</h4>
+		<p>There are a couple of image resizing scripts out there that already have this function. Some authors simply use the add_image_size() function to define custom image sizes that will be generated for each image uploaded via the media uploader. I mostly find these methods somewhat a little complicated to use, or having some limitations or too resource intensive.</p>
+		<p>With Aqua Resizer, the only required inputs are the URL and width. It's easy, fast &amp; efficient. Additionally, you have the additional options such as the height, crop, and array return.</p>
+		
+		<hr>
+		
+		<h3>How to use</h3>
+		<p>You can use the solution as WordPress plugin or include the functions in your WordPress theme.</p>
+		
+		<h4>As Plugin</h4>
+		<p>Install the plugin and activate in backend. After activation you can use all functions.</p>
+		<ul>
+			<li>Upload the file to the <code>/wp-content/plugins/</code> directory</li>
+			<li>Activate the plugin through the 'Plugins' menu in WordPress</li>
+		</ul>
+		
+		<h4>In your theme</h4>
+		<p>Include the the file with follow syntax in your <code>functions.php</code> of your theme and now you can also use the functions. </p>
+		<pre><code>require_once( 'aq_resizer.php' );</code></pre>
+		
+		<p>Now you can use the different functions.</p>
+		
+		<p>The follow is only an small example, you find more functions, possibilities and examples of source on the <a href="https://github.com/bueltge/WP-Image-Resizer/wiki">wiki</a> to this repository
+		You can then use it in your theme as such:</p>
+		
+		<p><strong>Echo img-tag</strong></p>
+		<pre><code>$args = array( 'url' =&gt; 'your img url', 'width' =&gt; 'your wish for width' );
+wp_img_resizer( $args );</code></pre>
+		
+		<p><strong>Return single value or array with url, width, height</strong></p>
+		<pre><code>$args = array( 'url' =&gt; 'your img url', 'width' =&gt; 'your wish for width' );
+wp_img_resizer_src( $args );</code></pre>
+		
+		<p><strong>Shortcode for an gallery</strong></p>
+		<pre><code>[resizer_gallery width='120']</code></pre>
+		
+		<p><strong>Also the first solution if Aqua Resizer</strong></p>
+		<pre><code>aq_resize( $img_url, $width );</code></pre>
+		
+		<hr>
+		
+		<h3>Documentation</h3>
+		<p>More usage instructions and examples can be found in our <a href="https://github.com/bueltge/WP-Image-Resizer/wiki">wiki</a></p>
+		<ul>
+			<li><a href="https://github.com/bueltge/WP-Image-Resizer/wiki">Home</a></li>
+			<li><a href="https://github.com/bueltge/WP-Image-Resizer/wiki/Examples">Examples</a></li>
+			<li><a href="https://github.com/bueltge/WP-Image-Resizer/wiki/Parameters">Parameters</a></li>
+		</ul>
+		
+		<hr>
+		
+		<h3>Installation</h3>
+		<h4>Requirements</h4>
+		<ul>
+			<li>WordPress (also Multisite) version 3.3 and later (tested at 3.6-alpha)</li>
+			<li>PHP 5.2.4</li>
+			<li>This function will only work with local images from your server. Resizing images from external URLs isn't supported. It is just too slow, especially if the WP_HTTP API fails and times-out. No one wants to experience a slow site. I'm sure there would also be some security risks involved also, so I simply haven't tried to get it to work.</li>
+		</ul>
+		
+		<h4>Installation</h4>
+		<ul>
+			<li>Use as plugin or</li>
+			<li>use in your plugin or theme as library</li>
+		</ul>
+		
+		<hr>
+		
+		<h3>Other Notes</h3>
+		<h4>Disclaimer</h4>
+		<p>I'm German and my English might be gruesome here and there. So please be patient with me and let me know of typos or grammatical farts. Thanks</p>
+		
+		<h4>Contact &amp; Feedback</h4>
+		<p>The plugin is designed and developed by (<a href="http://bueltge.de">Frank Bültge</a>) based on the idea from <a href="http://aquagraphite.com/">Syamil MJ</a></p>
+		<p>Please let me know if you like the plugin or you hate it or whatever ... Please fork it, add an issue for ideas and bugs.</p>
+		
+		<h4>License</h4>
+		<p>Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog. But if you enjoy this plugin, you can thank me and leave a <a href="http://bueltge.de/wunschliste/" title="Wishliste and Donate">small donation</a> for the time I've spent writing and supporting this plugin. And I really don't want to know how many hours of my life this plugin has already eaten ;)</p>
+		
+		<hr>
+		
+		<h3>Changelog</h3>
+		<ul>
+			<li>See the small <a href="https://github.com/bueltge/WP-Image-Resizer">changelog on readme</a> or ...</li>
+			<li>See the list of <a href="https://github.com/bueltge/WP-Image-Resizer/commits/master">commits</a></li>
+		</ul>
+		
+		<hr>
+		
+		<footer>
+			<p class="text-center">WordPress Image Resizer is maintained by <a href="https://github.com/bueltge">bueltge</a></p>
+		</footer>
+		
+		<script type="text/javascript">
+		
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-38421089-1']);
+		  _gaq.push(['_setDomainName', 'github.com']);
+		  _gaq.push(['_setAllowLinker', true]);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/bueltge/WP-Image-Resizer/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/bueltge/WP-Image-Resizer/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/bueltge/WP-Image-Resizer" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>WordPress Image Resizer</h1>
-
-<p>Based on the idea of <a href="https://github.com/sy4mil/Aqua-Resizer">Aqua Resizer</a> from <a href="http://aquagraphite.com/">Syamil MJ</a> -- Thanks</p>
-
-<h2>Description</h2>
-
-<p>This small script will allow you to resize &amp; crop WordPress images uploaded via the media uploader. It relies on WP's native functions to resize the images, and checks if there is an already resized version of the image so that it won't be wasting your server's resources to regenerate the images.</p>
-
-<h3>Why use it?</h3>
-
-<p>There are a couple of image resizing scripts out there that already have this function. Some authors simply use the add_image_size() function to define custom image sizes that will be generated for each image uploaded via the media uploader. I mostly find these methods somewhat a little complicated to use, or having some limitations or too resource intensive.</p>
-
-<p>With Aqua Resizer, the only required inputs are the URL and width. It's easy, fast &amp; efficient. Additionally, you have the additional options such as the height, crop, and array return.</p>
-
-<h3>How to use</h3>
-
-<p>You can use the solution as plugin or include the functions in your theme.</p>
-
-<p><strong>As Plugin</strong></p>
-
-<p>Install the plugin and activate in backend. After activation you can use all functions.
-1. Upload the file to the <code>/wp-content/plugins/</code> directory
-1. Activate the plugin through the 'Plugins' menu in WordPress</p>
-
-<p><strong>In your theme</strong></p>
-
-<p>Include the the file with follow syntax in your <code>functions.php</code> of your theme and now you can also use the functions. </p>
-
-<pre><code>require_once( 'aq_resizer.php' );
-</code></pre>
-
-<p>Now you can use the different functions.</p>
-
-<p>The follow is only an small example, you find more functions, possibilities and examples of source on the <a href="https://github.com/bueltge/WP-Image-Resizer/wiki">wiki</a> to this repository
-You can then use it in your theme as such:</p>
-
-<p><strong>Echo img-tag</strong></p>
-
-<pre><code>  $args = array( 'url' =&gt; 'your img url', 'width' =&gt; 'your wish for width' );
-  wp_img_resizer( $args );
-</code></pre>
-
-<p><strong>Return single value or array with url, width, height</strong></p>
-
-<pre><code>  $args = array( 'url' =&gt; 'your img url', 'width' =&gt; 'your wish for width' );
-  wp_img_resizer_src( $args );
-</code></pre>
-
-<p><strong>Shortcode for an gallery</strong></p>
-
-<pre><code>[resizer_gallery width='120']
-</code></pre>
-
-<p><strong>Also the first solution if Aqua Resizer</strong></p>
-
-<pre><code>  aq_resize( $img_url,$width );
-</code></pre>
-
-<p>More usage instructions and examples can be found in our <a href="https://github.com/bueltge/WP-Image-Resizer/wiki">wiki</a></p>
-
-<h2>Installation</h2>
-
-<h3>Requirements</h3>
-
-<ul>
-<li>WordPress (also Multisite) version 3.3 and later (tested at 3.5-RC4)</li>
-<li>PHP 5.2.4</li>
-</ul><h3>Installation</h3>
-
-<ul>
-<li>Use as plugin or</li>
-<li>use in your plugin or theme as library</li>
-</ul><h2>Other Notes</h2>
-
-<h3>Disclaimer</h3>
-
-<p>I'm German and my English might be gruesome here and there. So please be patient with me and let me know of typos or grammatical farts. Thanks</p>
-
-<h3>Contact &amp; Feedback</h3>
-
-<p>The plugin is designed and developed by (<a href="http://bueltge.de">Frank Bültge</a>) based on the idea from <a href="http://aquagraphite.com/">Syamil MJ</a></p>
-
-<p>Please let me know if you like the plugin or you hate it or whatever ... Please fork it, add an issue for ideas and bugs.</p>
-
-<h3>License</h3>
-
-<p>Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog. But if you enjoy this plugin, you can thank me and leave a <a href="http://bueltge.de/wunschliste/" title="Wishliste and Donate">small donation</a> for the time I've spent writing and supporting this plugin. And I really don't want to know how many hours of my life this plugin has already eaten ;)</p>
-
-<h2>Changelog</h2>
-
-<p>Dez 06, 2012</p>
-
-<ul>
-<li>Update for use in WordPress 3.5; use the new class <code>WP_Image_Editor</code>
-</li>
-<li>Hint: more about changes in WP 3.5 to images see this <a href="http://make.wordpress.org/core/2012/12/06/wp_image_editor-is-incoming/">post</a>
-</li>
-</ul><p>May 31, 2012</p>
-
-<ul>
-<li>Fix for themes, there are unsupported thumbnails</li>
-</ul><p>Global</p>
-
-<ul>
-<li>See the <a href="https://github.com/bueltge/WP-Image-Resizer/commits/master">commits</a>
-</li>
-</ul>
-        </section>
-
-        <footer>
-          WordPress Image Resizer is maintained by <a href="https://github.com/bueltge">bueltge</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-                  <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-38437109-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-      </div>
-    </div>
-  </body>
+	</div>
+</body>
 </html>
