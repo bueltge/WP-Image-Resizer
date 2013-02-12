@@ -14,6 +14,7 @@ if ( ! function_exists( 'wp_img_resizer_single' ) ) {
 	 * @param   $width  Integer Value for width of the croped image
 	 * @param   $height Integer Optional, value for the height of the croped image
 	 * @param   $size   String  Optional, Value for the original image size
+	 * @param   $retina Boolean Optional, Do you will use for retina, double size
 	 * @return          String, img-Tag with values of the croped image
 	 */
 	function wp_img_resizer_single( $width = '', $height = NULL, $size = 'full', $retina = FALSE ) {
