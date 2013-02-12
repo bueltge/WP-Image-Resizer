@@ -17,8 +17,9 @@ You can use the solution as plugin or include the functions in your theme.
 ### As Plugin
 
 Install the plugin and activate in backend. After activation you can use all functions.
-1. Upload the file to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+
+ 1. Upload the file to the `/wp-content/plugins/` directory
+ 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 ### In your theme
 
