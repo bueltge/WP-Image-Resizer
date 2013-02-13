@@ -92,6 +92,7 @@ Feb 12, 2013
  * Create [Github Page](http://bueltge.github.com/WP-Image-Resizer)
  * Add Support for Retina, Double values
  * Small minor changes
+ * Enhance Error Handling with WP defaults
 
 Dez 06, 2012
  * Update for use in WordPress 3.5; use the new class `WP_Image_Editor`

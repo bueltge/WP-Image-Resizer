@@ -14,6 +14,7 @@ if ( ! function_exists( 'wp_img_resizer_single' ) ) {
 	 * @param   $width  Integer Value for width of the croped image
 	 * @param   $height Integer Optional, value for the height of the croped image
 	 * @param   $size   String  Optional, Value for the original image size
+	 * @param   $retina Boolean Optional, Do you will use for retina, double size
 	 * @return          String, img-Tag with values of the croped image
 	 */
 	function wp_img_resizer_single( $width = '', $height = NULL, $size = 'full', $retina = FALSE ) {
@@ -22,7 +23,7 @@ if ( ! function_exists( 'wp_img_resizer_single' ) ) {
 		$img_url = wp_get_attachment_url( get_post_thumbnail_id(), $size );
 		
 		if ( empty( $img_url ) )
-			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $url );
+			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $img_url );
 		
 		$args = array(
 			'url'    => $img_url,
@@ -218,7 +219,7 @@ if ( ! function_exists( 'wp_img_resizer_attachment_link' ) ) {
 		$_post = & get_post( $id );
 		
 		if ( empty( $_post ) || ( 'attachment' != $_post->post_type ) || ! $url = wp_get_attachment_url( $_post->ID ) )
-			return __( 'Missing Attachment' );
+			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $url );
 	
 		if ( $permalink )
 			$url = get_attachment_link( $_post->ID );
