@@ -5,7 +5,7 @@
  * Text Domain: wp-img-resizer
  * Domain Path: /languages
  * Description: Resize images on the fly - an TimThumb alternative with WordPress defaults
- * Version:	    1.0.0
+ * Version:     1.0.0
  * Author:      Frank Bültge, Syamil MJ
  * Author URI:  http://bueltge.de/
  * License:     GPLv3
@@ -39,5 +39,7 @@
  * ==============================================================================
  * This plugin requires WordPress >= 3.5 and tested with PHP Interpreter >= 5.3
  */
+
+! defined( 'ABSPATH' ) and exit;
 
 require_once 'aq_resizer.php';
