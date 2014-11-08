@@ -87,6 +87,9 @@ Please let me know if you like the plugin or you hate it or whatever ... Please 
 Good news, this plugin is free for everyone! Since it's released under the GPL, you can use it free of charge on your personal or commercial blog. But if you enjoy this plugin, you can thank me and leave a [small donation](http://bueltge.de/wunschliste/ "Wishliste and Donate") for the time I've spent writing and supporting this plugin. And I really don't want to know how many hours of my life this plugin has already eaten ;)
 
 ## Changelog
+Nov 08, 2014
+* `wp_get_attachment_url` doesn't support a size parameter, Fix via [Pull Request](https://github.com/bueltge/WP-Image-Resizer/pull/2), props [@eliorivero](https://github.com/eliorivero)
+
 Feb 12, 2013
  * Update Readme
  * Create [Github Page](http://bueltge.github.com/WP-Image-Resizer)

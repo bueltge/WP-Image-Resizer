@@ -5,11 +5,11 @@
  * Text Domain: wp-img-resizer
  * Domain Path: /languages
  * Description: Resize images on the fly - an TimThumb alternative with WordPress defaults
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Frank Bültge, Syamil MJ
  * Author URI:  http://bueltge.de/
  * License:     GPLv3
- * 
+ * Last Change: 2014-11-08
  * 
  * 
  * Based on the idea Aqua-Resizer
@@ -19,7 +19,7 @@
  * 
  * License:
  * ==============================================================================
- * Copyright 2012 - 2013 Frank Bültge  (email : frank@bueltge.de)
+ * Copyright 2012 - 2014 Frank Bültge  (email : frank@bueltge.de)
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
