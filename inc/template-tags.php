@@ -2,7 +2,7 @@
 /**
  * WordPress Image Resizer
  * 
- * @version  1.0.1
+ * @version  02/12/2013
  * @author   fb
  */
 
@@ -14,22 +14,23 @@ if ( ! function_exists( 'wp_img_resizer_single' ) ) {
 	 * @param   $width  Integer Value for width of the croped image
 	 * @param   $height Integer Optional, value for the height of the croped image
 	 * @param   $size   String  Optional, Value for the original image size
+	 * @param   $retina Boolean Optional, Do you will use for retina, double size
 	 * @return          String, img-Tag with values of the croped image
 	 */
-	function wp_img_resizer_single( $width = '', $height = NULL, $size = 'full' ) {
-		// set for reset
-		$img_url = FALSE;
+	function wp_img_resizer_single( $width = '', $height = NULL, $size = 'full', $retina = FALSE ) {
 		
-	 	// get full URL to image (use "large" or "medium" if the images too big)
-		$img_url = wp_get_attachment_url( get_post_thumbnail_id(), $size );
+		// get full URL to image (use "large" or "medium" if the images too big)
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id(), $size );
+		$img_url = $image[0];
 		
-		if ( ! $img_url )
-			return;
+		if ( empty( $img_url ) )
+			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $img_url );
 		
 		$args = array(
 			'url'    => $img_url,
 			'width'  => $width,
-			'height' => $height
+			'height' => $height,
+			'retina' => $retina
 		);
 		
 		return wp_img_resizer( $args );
@@ -204,20 +205,22 @@ if ( ! function_exists( 'wp_img_resizer_attachment_link' ) ) {
 	 * @since  2.5.0
 	 * @uses   apply_filters() Calls 'wp_get_attachment_link' filter on HTML content with same parameters as function.
 	 * 
-	 * @param  int $id Optional. Post ID.
-	 * @param  string $size Optional, default is 'thumbnail'. Size of image, either array or string.
-	 * @param  bool $permalink Optional, default is false. Whether to add permalink to image.
-	 * @param  bool $icon Optional, default is false. Whether to include icon.
-	 * @param  string $text Optional, default is false. If string, then will be link text.
+	 * @param  int    $id        Optional, Post ID.
+	 * @param  string $size      Optional, default is 'thumbnail'. Size of image, either array or string.
+	 * @param  bool   $permalink Optional, default is false. Whether to add permalink to image.
+	 * @param  bool   $icon      Optional, default is false. Whether to include icon.
+	 * @param  string $text      Optional, default is false. If string, then will be link text.
+	 * @param  int    $width     Optional, the width of image | default is the settings of WP
+	 * @param  bool   $retina    Optional, boolean for creating images that are double the width and height. | default is FALSE
 	 * @return string HTML content.
 	 */
-	function wp_img_resizer_attachment_link( $id = 0, $size = 'thumbnail', $permalink = false, $icon = false, $text = false, $width = FALSE ) {
+	function wp_img_resizer_attachment_link( $id = 0, $size = 'thumbnail', $permalink = false, $icon = false, $text = false, $width = FALSE, $retina = FALSE ) {
 		
 		$id = intval( $id );
 		$_post = & get_post( $id );
 		
 		if ( empty( $_post ) || ( 'attachment' != $_post->post_type ) || ! $url = wp_get_attachment_url( $_post->ID ) )
-			return __( 'Missing Attachment' );
+			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $url );
 	
 		if ( $permalink )
 			$url = get_attachment_link( $_post->ID );
@@ -225,9 +228,10 @@ if ( ! function_exists( 'wp_img_resizer_attachment_link' ) ) {
 		$post_title = esc_attr( $_post->post_title );
 		
 		$args = array(
-			'url'   => wp_get_attachment_url( $id , $size ),
-			'width' => $width,
-			'echo'  => FALSE
+			'url'    => wp_get_attachment_url( $id , $size ),
+			'width'  => $width,
+			'retina' => $retina,
+			'echo'   => FALSE
 		);
 		$link = wp_img_resizer( $args );
 		
