@@ -20,7 +20,8 @@ if ( ! function_exists( 'wp_img_resizer_single' ) ) {
 	function wp_img_resizer_single( $width = '', $height = NULL, $size = 'full', $retina = FALSE ) {
 		
 		// get full URL to image (use "large" or "medium" if the images too big)
-		$img_url = wp_get_attachment_url( get_post_thumbnail_id(), $size );
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id(), $size );
+		$img_url = $image[0];
 		
 		if ( empty( $img_url ) )
 			return new WP_Error( 'no_image_url', __( 'No image URL has been entered.' ), $img_url );
