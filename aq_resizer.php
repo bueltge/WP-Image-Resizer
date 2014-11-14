@@ -2,24 +2,26 @@
 /**
  * WordPress Image Resizer
  * 
- * @version  02/12/2013
- * @author   fb
+ * @version  2014-11-14
+ * @author   Frank Bueltge <frank@bueltge.de>
  */
 
 require_once 'inc/resizer.php';
 require_once 'inc/template-tags.php';
 
 if ( ! function_exists( 'aq_resize' ) ) {
-	
+
 	/**
 	 * Aqua Resizer
-	 * 
+	 *
 	 * @param string $url    - (required) must be uploaded using wp media uploader
-	 * @param int    $width  - (required) 
-	 * @param int    $height - (optional) 
+	 * @param int    $width  - (required)
+	 * @param int    $height - (optional)
 	 * @param bool   $crop   - (optional) default to soft crop
 	 * @param bool   $retina - (optional) default to no double of width and height
 	 * @param bool   $single - (optional) returns an array if false
+	 *
+	 * @return array|string|WP_Error
 	 */
 	function aq_resize( $url, $width = NULL, $height = NULL, $crop = NULL, $retina = FALSE, $single = TRUE ) {
 		
